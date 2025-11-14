@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="shopify-api-key" content="5911e5a496720584842b1e649a6d6cd8">
+    <div class="header">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>App Settings</h1>
+            <button onclick="goBack()" class="back-btn">
+                ← Back
+            </button>
+        </div>
+    </div>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        
+
+        <div class="card">
+            
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="orderLimit">Maximum Orders to Fetch:</label>
+                    <input type="number" id="orderLimit" min="1" max="1000" required>
+                    <div class="info-text">
+                        Limits how many draft orders are fetched from Shopify at once. 
+                        Higher numbers may be slower but show more orders.
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button type="submit" class="btn btn-primary">
+                        💾 Save Settings
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="loadSettings()">
+                        🔄 Reset to Saved
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>📊 Current Settings</h2>
+            <div id="currentSettings" class="mt-3">
+                <div class="loading">Loading current settings...</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>ℹ️ Settings Information</h2>
+            <div class="info-text">
+                <p><strong>Order Limit Guidelines:</strong></p>
+                <ul>
+                    <li>✅ <strong>10-50</strong>: Fast performance, good for testing</li>
+                    <li>✅ <strong>50-200</strong>: Balanced performance for most stores</li>
+                    <li>✅ <strong>200-500</strong>: For stores with many draft orders</li>
+                    <li>✅ <strong>500-1000</strong>: Maximum limit for large stores</li>
+                </ul>
+                <p><strong>Note:</strong> This only affects how many orders are displayed and available for reminders. 
+                It doesn't affect the scheduling system.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="settings.js"></script>
+
+    <style>
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
+    </style>
+</body>
+</html>

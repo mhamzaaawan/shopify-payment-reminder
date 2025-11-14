@@ -1,0 +1,16 @@
+name = "Payment-Reminder"
+client_id = "8727b78d34d45fdcbe798b027c6dbfcf"
+application_url = "https://generous-elise-swayingly.ngrok-free.dev"
+embedded = true
+
+[access_scopes]
+scopes = "read_draft_orders,write_draft_orders"
+
+[auth]
+redirect_urls = [
+    "https://generous-elise-swayingly.ngrok-free.dev/auth/callback",
+    "https://generous-elise-swayingly.ngrok-free.dev/"
+]
+
+[webhooks]
+api_version = "2025-01"

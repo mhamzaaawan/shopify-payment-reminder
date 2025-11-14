@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="shopify-api-key" content="5911e5a496720584842b1e649a6d6cd8">
+    <div class="header">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Schedule Settings</h1>
+            <button onclick="goBack()" class="back-btn">
+                ← Back
+            </button>
+        </div>
+    </div>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        
+
+        <div class="card">
+            <h2>📅 Reminder Schedule</h2>
+            <form id="scheduleForm">
+                <div class="form-group">
+                    <label>Select days to send reminders:</label>
+                    <div class="schedule-grid">
+                        <label class="day-checkbox" id="mondayLabel">
+                            <input type="checkbox" id="monday" name="monday" value="1">
+                            <span>Monday</span>
+                        </label>
+                        <label class="day-checkbox" id="tuesdayLabel">
+                            <input type="checkbox" id="tuesday" name="tuesday" value="1">
+                            <span>Tuesday</span>
+                        </label>
+                        <label class="day-checkbox" id="wednesdayLabel">
+                            <input type="checkbox" id="wednesday" name="wednesday" value="1">
+                            <span>Wednesday</span>
+                        </label>
+                        <label class="day-checkbox" id="thursdayLabel">
+                            <input type="checkbox" id="thursday" name="thursday" value="1">
+                            <span>Thursday</span>
+                        </label>
+                        <label class="day-checkbox" id="fridayLabel">
+                            <input type="checkbox" id="friday" name="friday" value="1">
+                            <span>Friday</span>
+                        </label>
+                        <label class="day-checkbox" id="saturdayLabel">
+                            <input type="checkbox" id="saturday" name="saturday" value="1">
+                            <span>Saturday</span>
+                        </label>
+                        <label class="day-checkbox" id="sundayLabel">
+                            <input type="checkbox" id="sunday" name="sunday" value="1">
+                            <span>Sunday</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sendTime">Send time (24-hour format):</label>
+                    <input type="time" id="sendTime" class="time-input" required>
+                    <div class="info-text">
+                        Reminders will be sent at this time on selected days
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button type="submit" class="btn btn-primary">
+                        💾 Save Schedule
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="loadScheduleSettings()">
+                        🔄 Reset to Saved
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="selectAllDays()">
+                        ✅ Select All Days
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="clearAllDays()">
+                        ❌ Clear All Days
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>📋 Schedule Information</h2>
+            <div class="info-text">
+                <p><strong>How it works:</strong></p>
+                <ul>
+                    <li>✅ The system checks for due reminders every minute</li>
+                    <li>✅ Reminders are sent only on selected days at the specified time</li>
+                    <li>✅ Each reminder uses the next template in rotation</li>
+                    <li>✅ If no days are selected, no automatic reminders will be sent</li>
+                    <li>✅ You can still send manual reminders from the dashboard</li>
+                </ul>
+            </div>
+            
+            <div id="currentSchedule" class="mt-3">
+                <div class="loading">Loading current schedule...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="schedule.js"></script>
+
+    <style>
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
+    </style>
+</body>
+</html>

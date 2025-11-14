@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install Payment Reminder App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .install-form {
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .features {
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .features h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            color: #5d6d7e;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:before {
+            content: "✅";
+            margin-right: 10px;
+        }
+
+        .help-text {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .error {
+            background: #ffe6e6;
+            border: 1px solid #ff4444;
+            color: #d63031;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🔐</div>
+        <h1>Install Payment Reminder App</h1>
+        <p class="subtitle">Protected Installation - Password Required</p>
+        
+        <div class="error" id="errorMessage"></div>
+        
+        <div class="install-form">
+            <div class="input-group">
+                <label for="shopDomain">Your Shopify Store Domain</label>
+                <input 
+                    type="text" 
+                    id="shopDomain" 
+                    placeholder="your-store.myshopify.com"
+                    required
+                >
+            </div>
+            
+            <div class="input-group">
+                <label for="installPassword">Installation Password</label>
+                <input 
+                    type="password" 
+                    id="installPassword" 
+                    placeholder="Enter installation password"
+                    required
+                >
+            </div>
+            
+            <button class="btn" onclick="verifyAndInstall()">
+                🔒 Verify & Install
+            </button>
+        </div>
+
+        <div class="features">
+            <h3>✨ App Features</h3>
+            <ul class="feature-list">
+                <li>Automated payment reminders</li>
+                <li>Customizable email templates</li>
+                <li>Scheduled sending</li>
+                <li>Multiple store support</li>
+                <li>Real-time analytics</li>
+            </ul>
+        </div>
+
+        <div class="help-text">
+            <strong>Need installation access?</strong><br>
+            Contact the app developer for the installation password.
+        </div>
+    </div>
+
+    <script>
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+        }
+
+        function hideError() {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.style.display = 'none';
+        }
+
+        async function verifyAndInstall() {
+            const shopDomain = document.getElementById('shopDomain').value.trim();
+            const password = document.getElementById('installPassword').value.trim();
+            
+            hideError();
+            
+            if (!shopDomain) {
+                showError('Please enter your Shopify store domain');
+                return;
+            }
+            
+            if (!shopDomain.includes('.myshopify.com')) {
+                showError('Please enter a valid Shopify domain (e.g., your-store.myshopify.com)');
+                return;
+            }
+            
+            if (!password) {
+                showError('Please enter the installation password');
+                return;
+            }
+
+            try {
+                const response = await fetch('/verify-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        shop: shopDomain,
+                        password: password
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // Password verified, redirect to installation
+                    window.location.href = result.redirectUrl;
+                } else {
+                    showError(result.error || 'Invalid password. Please try again.');
+                }
+            } catch (error) {
+                console.error('Installation error:', error);
+                showError('Installation failed. Please try again.');
+            }
+        }
+
+        // Allow Enter key to submit
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyAndInstall();
+            }
+        });
+
+        // Clear error when user starts typing
+        document.getElementById('shopDomain').addEventListener('input', hideError);
+        document.getElementById('installPassword').addEventListener('input', hideError);
+    </script>
+</body>
+</html>
