@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 class ShopifyAuth {
     // Generate installation URL for a shop
-    static getInstallUrl(shop, apiKey, host, scopes = 'read_orders,write_orders,read_customers') {
+    static getInstallUrl(shop, apiKey, host, scopes = 'read_draft_orders,write_draft_orders') {
         const nonce = crypto.randomBytes(16).toString('hex');
         const redirectUri = `${host}/auth/callback`;
         

@@ -254,12 +254,11 @@ app.get('/install-success', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    console.log(`📊 Dashboard: http://localhost:${PORT}`);
-    console.log(`📝 Templates: http://localhost:${PORT}/templates`);
-    console.log(`⏰ Schedule: http://localhost:${PORT}/schedule`);
-    console.log(`⚙️ Settings: http://localhost:${PORT}/settings`);
-    console.log(`🔐 Direct Install: http://localhost:${PORT}/auth?shop=your-store.myshopify.com`);
+    console.log(`📊 Dashboard: ${process.env.HOST || `http://localhost:${PORT}`}`);
+console.log(`📝 Templates: ${process.env.HOST || `http://localhost:${PORT}`}/templates`);
+console.log(`⏰ Schedule: ${process.env.HOST || `http://localhost:${PORT}`}/schedule`);
+console.log(`⚙️ Settings: ${process.env.HOST || `http://localhost:${PORT}`}/settings`);
+console.log(`🔐 Direct Install: ${process.env.HOST || `http://localhost:${PORT}`}/auth?shop=your-store.myshopify.com`);
 });
 
 // Start scheduler
